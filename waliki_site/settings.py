@@ -37,6 +37,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'waliki',
+    'waliki.git',
+    'waliki.attachments',
+
+
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -119,3 +125,26 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+
+# Additionals
+
+LOGIN_URL = "/wiki/accounts/login/"
+
+WALIKI_ANONYMOUS_USER_PERMISSIONS = (
+    "view_page",
+    "add_page",
+    "change_page"
+)
+
+# waliki Search setups
+
+HAYSTACK_CONNECTIONS = {
+  'default': {
+    'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
+    'PATH': os.path.join(BASE_DIR, 'search_index'),
+  },
+}
+
+HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
